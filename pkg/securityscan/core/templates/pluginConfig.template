@@ -38,6 +38,12 @@ data:
       - hostPath:
           path: /etc/cni/net.d
         name: rke2-cni
+      - hostPath:
+          path: /usr/local/lib
+        name: std-unit-file-path
+      - hostPath:
+          path: /usr/lib
+        name: rhel-unit-file-path
     sonobuoy-config:
       driver: DaemonSet
       plugin-name: rancher-kube-bench
@@ -82,3 +88,9 @@ data:
       - mountPath: /etc/cni/net.d
         name: rke2-cni
         readOnly: true
+      - mountPath: /usr/local/lib
+        name: std-unit-file-path
+        readOnly: true
+      - mountPath: /usr/lib
+        name: rhel-unit-file-path
+        readOnly: true        

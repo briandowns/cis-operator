@@ -128,8 +128,22 @@ func New(clusterscan *cisoperatorapiv1.ClusterScan, clusterscanprofile *cisopera
 							HostPath: &corev1.HostPathVolumeSource{
 								Path: `/etc/group`,
 							},
-						}},
-					},
+						},
+					}, {
+						Name: `std-unit-file-loc`,
+						VolumeSource: corev1.VolumeSource{
+							HostPath: &corev1.HostPathVolumeSource{
+								Path: `/usr/local/lib`,
+							},
+						},
+					}, {
+						Name: `rhel-unit-file-loc`,
+						VolumeSource: corev1.VolumeSource{
+							HostPath: &corev1.HostPathVolumeSource{
+								Path: `/usr/lib`,
+							},
+						},
+					}},
 					Containers: []corev1.Container{{
 						Name:            `rancher-cis-benchmark`,
 						Image:           imageConfig.SecurityScanImage + ":" + imageConfig.SecurityScanImageTag,
@@ -182,6 +196,12 @@ func New(clusterscan *cisoperatorapiv1.ClusterScan, clusterscanprofile *cisopera
 						}, {
 							Name:      `etc-group`,
 							MountPath: `/etc/group`,
+						}, {
+							Name:      `std-unit-file-loc`,
+							MountPath: `/usr/local/lib`,
+						}, {
+							Name:      `rhel-unit-file-loc`,
+							MountPath: `/usr/lib`,
 						}},
 					}},
 				},
